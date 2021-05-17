@@ -1,0 +1,8 @@
+use datacars;
+select  m.name mark_name, mf.name  mf_name
+  from mark m
+  left join stock s              on m.id  = s.markid 
+  left join shop sh              on sh.id = s.shopid
+  left join manufacturer mf      on mf.id  = m.manufacturerid 
+  where quantity = 0 or quantity is null
+  group by  m.name;

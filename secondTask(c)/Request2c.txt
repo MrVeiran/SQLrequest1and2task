@@ -1,0 +1,13 @@
+use datacars;
+select sh.name shop_name, m.name mark_name,  s.quantity quantity, a.shop_name best_shop
+  from shop sh
+   left join stock s              on sh.id = s.shopid 
+   left join mark m               on m.id = s.markid
+     left join (select sh.name shop_name , max(s.quantity) quantity, m.name name
+	from mark m
+	left join stock s              on m.id  = s.markid 
+	left join shop sh              on sh.id = s.shopid
+    group by m.name ) a on a.name=m.name
+
+
+  having quantity >10;

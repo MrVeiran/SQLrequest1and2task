@@ -1,0 +1,7 @@
+use datacars;
+select sh.name shop_name, SUM(s.quantity) quantity, m.name mark_name, mf.name  mf_name
+  from stock s
+  join shop sh                   on sh.id = s.shopid
+  left join mark m               on m.id  = s.markid
+  left join manufacturer mf      on mf.id  = m.manufacturerid 
+  group by sh.name , m.name , mf.name order by sum(s.quantity) desc;
